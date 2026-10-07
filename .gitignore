@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Environment files (never commit secrets)
+.env
+backend-node/.env
+ml-service/.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+ml-service/saved_model/*.joblib
+ml-service/saved_model/*.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
