@@ -16,7 +16,7 @@ export async function testConnection() {
   const client = await pool.connect();
   try {
     const res = await client.query("SELECT NOW()");
-    console.log("✅ Connected to PostgreSQL at:", res.rows[0].now);
+    console.log("Connected to PostgreSQL at:", res.rows[0].now);
   } finally {
     client.release();
   }

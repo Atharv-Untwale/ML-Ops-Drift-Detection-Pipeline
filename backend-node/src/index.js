@@ -16,11 +16,11 @@ async function start() {
   await testConnection();
 
   app.listen(config.port, () => {
-    console.log(`🚀 Server running on http://localhost:${config.port}`);
+    console.log(`Server running on http://localhost:${config.port}`);
   });
 }
 
 start().catch((err) => {
-  console.error("❌ Failed to start server:", err);
+  console.error("Failed to start server:", err);
   process.exit(1);
 });
