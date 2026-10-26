@@ -4,6 +4,7 @@ import { config } from "./config.js";
 import { testConnection } from "./db/pool.js";
 import predictRouter from "./routes/predict.js";
 import mockMlRouter from "./routes/mockMl.js";
+import statsRouter from "./routes/stats.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/predict", predictRouter);
+app.use("/api", statsRouter);
 
 // Temporary mock ML service, mounted under /mock-ml
 app.use("/mock-ml", mockMlRouter);
