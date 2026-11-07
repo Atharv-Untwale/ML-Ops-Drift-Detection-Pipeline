@@ -6,6 +6,7 @@ import predictRouter from "./routes/predict.js";
 import mockMlRouter from "./routes/mockMl.js";
 import statsRouter from "./routes/stats.js";
 import labelsRouter from "./routes/labels.js";
+import monitoringRouter from "./routes/monitoring.js";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/health", (req, res) => {
 app.use("/predict", predictRouter);
 app.use("/api", statsRouter);
 app.use("/api", labelsRouter);
+app.use("/api", monitoringRouter);
 
 // Temporary mock ML service, mounted under /mock-ml
 app.use("/mock-ml", mockMlRouter);
