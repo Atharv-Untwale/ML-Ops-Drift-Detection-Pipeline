@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   timescaledb:
     image: timescale/timescaledb:latest-pg16
@@ -13,6 +11,29 @@ services:
       - "5432:5432"
     volumes:
       - timescale_data:/var/lib/postgresql/data
+      # Run only when the database is created from scratch (for example on a fresh clone).
+      - ./backend-node/src/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./backend-node/src/db/schema_v2.sql:/docker-entrypoint-initdb.d/02-schema-v2.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mlops_user -d mlops_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./backend-node
+    container_name: mlops_api
+    restart: unless-stopped
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+    environment:
+      PORT: "4000"
+      DATABASE_URL: postgresql://mlops_user:mlops_pass@timescaledb:5432/mlops_db
+      # The API serves its own mock model for now. Point this at the ML service later.
+      ML_SERVICE_URL: http://localhost:4000/mock-ml
+    ports:
+      - "4000:4000"
 
 volumes:
   timescale_data:
