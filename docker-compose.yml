@@ -32,6 +32,7 @@ services:
       DATABASE_URL: postgresql://mlops_user:mlops_pass@timescaledb:5432/mlops_db
       # The API serves its own mock model for now. Point this at the ML service later.
       ML_SERVICE_URL: http://localhost:4000/mock-ml
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-dev-admin-key}
     ports:
       - "4000:4000"
 

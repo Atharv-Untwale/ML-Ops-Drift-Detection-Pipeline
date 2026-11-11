@@ -7,6 +7,7 @@ import mockMlRouter from "./routes/mockMl.js";
 import statsRouter from "./routes/stats.js";
 import labelsRouter from "./routes/labels.js";
 import monitoringRouter from "./routes/monitoring.js";
+import detectorsRouter from "./routes/detectors.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/predict", predictRouter);
 app.use("/api", statsRouter);
 app.use("/api", labelsRouter);
 app.use("/api", monitoringRouter);
+app.use("/api", detectorsRouter);
 
 // Temporary mock ML service, mounted under /mock-ml
 app.use("/mock-ml", mockMlRouter);
